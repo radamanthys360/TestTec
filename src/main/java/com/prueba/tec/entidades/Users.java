@@ -15,11 +15,11 @@ public class Users {
 	@Column(name="username", length=50, nullable=false)
 	private String username;
 	
-	@Column(name="password", length=50, nullable=false)
+	@Column(name="password", length=200, nullable=false)
 	private String password;
 	
-	@Column(name="ENABLED", nullable=false)
-	private int enabled;
+	@Column(name="enabled", nullable=false)
+	private Boolean enabled;
 
 	public Users() {
 	}
@@ -40,11 +40,11 @@ public class Users {
 		this.password = password;
 	}
 
-	public int getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 	
