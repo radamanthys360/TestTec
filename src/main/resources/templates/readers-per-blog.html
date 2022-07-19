@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Readers Por Blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    </head>
+    <body>
+	<div th:insert="fragments/components  :: header"></div>
+	
+		<div style="width: 20%; float:left">
+        		<b> Menu Principal
+			<ul>
+				<li><a th:href="@{/readers-menu}">
+						<h4>Readers</h4>
+					</a></li>
+				<li><a th:href="@{/blogs-menu}">
+						<h4>Blogs</h4>
+					</a></li>
+					<li><a th:href="@{/reader-blog-menu}">
+						<h4>Reader por Blog</h4>
+				</a></li>
+			</ul>
+   </div>
+
+	<div style="width: 80%; float:right">
+	
+		<div th:switch="${conjunto}">
+			<h2 th:case="null">No existen Registros!</h2>
+			<div th:case="*">
+				<h2>Readers Per Blog</h2>
+				<table style="width:100%">
+					<thead>
+						<tr>
+							<th>Name Reader</th>
+							<th>Name Blog</th>
+							<th>Modificar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="fila : ${conjunto}">
+							<td th:text="${fila.nameReaderRes}"></td>
+							<td th:text="${fila.nameBlogRes}"></td>
+							<td><a th:href="@{/readers-blogs-modificar/
+								{idBlog}/{idReader} (idBlog=${fila.bIdRes},idReader=${fila.rIdRes}) }">Modificar</a></td>
+							<td><a th:href="@{/readers-blogs-eliminar/
+								{idBlog}/{idReader} (idBlog=${fila.bIdRes},idReader=${fila.rIdRes}) }">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p><a th:href="@{/readers-per-agregar}">Agregar Reader por Blog</a></p>
+		</div>
+	
+	
+	
+	</div>
+	
+	
+    
+   </body>
+</html>

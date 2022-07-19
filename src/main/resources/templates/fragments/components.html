@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:fragment="header">
+        <center>><h1>BANCO DE DESARROLLO DE EL SALVADOR</h1></center>
+    </header>
+    
+	<nav th:fragment="menu">
+		<b> Menu Principal
+			<ul>
+				<li><a th:href="@{/readers-menu}">
+						<h4>Readers</h4>
+					</a></li>
+				<li><a th:href="@{/readers-menu}">
+						<h4>Blogs</h4>
+					</a></li>
+	
+			</ul>
+	</nav>
+    
+</body>
+</html>
