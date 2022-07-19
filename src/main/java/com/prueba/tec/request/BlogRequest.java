@@ -6,10 +6,10 @@ public class BlogRequest {
 	
 	private Long pkBlogInput;
 	
-	@Size(min = 1, max = 100, message = "El campo title tiene un tama�o maximo de 100 caracteres")
+	@Size(min = 1, max = 50, message = "El campo title tiene un tama�o maximo de 50 caracteres")
 	private String titleInput;
 	
-	@Size(min = 1, max = 100, message = "El campo description tiene un tama�o maximo de 100 caracteres")
+	@Size(min = 1, max = 4000, message = "El campo description tiene un tama�o maximo de 4000 caracteres")
 	private String descriptionInput;
 
 	public Long getPkBlogInput() {

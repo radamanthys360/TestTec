@@ -17,12 +17,12 @@ public class Blogs {
 	@Column(name = "pk_blog", nullable = false)
 	private Long pkBlog;
 	
-	@Column(name = "title", length = 100, nullable = false)
-	@Size(min = 1, max = 100, message = "El campo title tiene un tama�o maximo de 100 caracteres")
+	@Column(name = "title", length = 50, nullable = false)
+	@Size(min = 1, max = 50, message = "El campo title tiene un tama�o maximo de 50 caracteres")
 	private String title;
 	
-	@Column(name = "description", length = 100, nullable = false)
-	@Size(min = 1, max = 100, message = "El campo description tiene un tama�o maximo de 100 caracteres")
+	@Column(name = "description", length = 4000, nullable = false)
+	@Size(min = 1, max = 4000, message = "El campo description tiene un tama�o maximo de 4000 caracteres")
 	private String description;
 
 	public Long getPkBlog() {

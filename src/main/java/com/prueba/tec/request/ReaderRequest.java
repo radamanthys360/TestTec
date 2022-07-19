@@ -6,7 +6,7 @@ public class ReaderRequest {
 	
 	private Long pkReaderInput;
 	
-	@Size(min = 1, max = 100, message = "El campo name tiene un tamaño maximo de 100 caracteres")
+	@Size(min = 1, max = 8, message = "El campo name tiene un tamaño maximo de 8 caracteres")
 	private String nameInput;
 
 	public Long getPkReaderInput() {

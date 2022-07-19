@@ -14,16 +14,19 @@
 		<div style="width: 20%; float:left">
         		<b> Menu Principal
 			<ul>
-				<li><a th:href="@{/readers-menu}">
+				<li><a th:href="@{/reader/readers-menu}">
 						<h4>Readers</h4>
 					</a></li>
-				<li><a th:href="@{/blogs-menu}">
+				<li><a th:href="@{/blog/blogs-menu}">
 						<h4>Blogs</h4>
 					</a></li>
-					<li><a th:href="@{/reader-blog-menu}">
+					<li><a th:href="@{/reader-blog/reader-blog-menu}">
 						<h4>Reader por Blog</h4>
 				</a></li>
 			</ul>
+			<form action="#" th:action="@{/logout}" method="POST">
+               <button  type="submit">Cerrar Sesion</button>
+            </form>
    </div>
 
 	<div style="width: 80%; float:right">
@@ -32,7 +35,7 @@
             <h2 class="mb-5">Nuevo Reader</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <form action="#" th:action="@{/guardar-reader}" th:object="${request}" method="post">
+                    <form action="#" th:action="@{/reader/guardar-reader}" th:object="${request}" method="post">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="pk" class="col-form-label">Pk Reader</label>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.prueba.tec.entidades.Blogs;
 import com.prueba.tec.entidades.BlogsReaders;
 import com.prueba.tec.entidades.Readers;
@@ -21,6 +23,7 @@ import com.prueba.tec.service.IBlogService;
 import com.prueba.tec.service.IReaderService;
 
 @Controller
+@RequestMapping("/reader-blog")
 public class ReaderBlogController {
 	
 	@Autowired
@@ -51,12 +54,17 @@ public class ReaderBlogController {
 	
     @GetMapping("/reader-blog-menu")
     public String menu(Model model) {
-      model.addAttribute("conjunto", cargaInicial()); 
+     List<ReaderPerBlogResponse> cargaInicial = cargaInicial();
+     if(cargaInicial.isEmpty()) {
+    	 model.addAttribute("conjunto", null);
+     }else {
+    	 model.addAttribute("conjunto", cargaInicial);
+     }
       return "readers-per-blog";
     }
     
     @GetMapping("/readers-per-agregar")
-    public String add(Model model) {
+    public String agregar(Model model) {
       List<Readers> readers = readerService.findAll();
       List<Blogs> blogs = blogService.findAll();
       
@@ -68,7 +76,7 @@ public class ReaderBlogController {
     }
     
     @GetMapping("/readers-blogs-modificar/{idBlog}/{idReader}")
-    public String readerModificar(@PathVariable("idBlog") long idBlog,@PathVariable("idReader") long idReader,Model model) {
+    public String modificar(@PathVariable("idBlog") long idBlog,@PathVariable("idReader") long idReader,Model model) {
      BlogsReaders findRecordById = blogReaderService.findRecordById(idBlog,idReader);
      ReaderBlogRequest pojo = parseoInverso(findRecordById);
      List<Readers> readers = readerService.findAll();
@@ -91,10 +99,7 @@ public class ReaderBlogController {
     
     
     @PostMapping("/guardar-conjunto")
-    public String addUser(@Valid @ModelAttribute("request") ReaderBlogRequest request, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-user";
-        }
+    public String guardar(@Valid @ModelAttribute("request") ReaderBlogRequest request, BindingResult result, Model model) {
         BlogsReaders entidad = parseo(request);
         blogReaderService.save(entidad);
     	

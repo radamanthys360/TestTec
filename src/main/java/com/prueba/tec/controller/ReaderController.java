@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.prueba.tec.entidades.Readers;
 import com.prueba.tec.request.ReaderRequest;
 import com.prueba.tec.service.IReaderService;
 
 @Controller
+@RequestMapping("/reader")
 public class ReaderController {
 	
 	@Autowired
@@ -23,22 +25,25 @@ public class ReaderController {
 	
 	
     @GetMapping("/readers-menu")
-    public String readerMenu(Model model) {
-    	List<Readers> lista = readerService.findAll();
-    	
-      model.addAttribute("readers", lista); 
+    public String menu(Model model) {
+      List<Readers> lista = readerService.findAll();
+      if(lista.isEmpty()) {
+    	  model.addAttribute("readers", null);
+      }else {
+    	  model.addAttribute("readers", lista);
+      }
       return "readers";
     }
     
     @GetMapping("/readers-agregar")
-    public String readerAgregar(Model model) {
+    public String agregar(Model model) {
       model.addAttribute("request", new ReaderRequest()); 
       return "add-readers";
     }
     
     
     @GetMapping("/readers-modificar/{id}")
-    public String readerModificar(@PathVariable("id") long id,Model model) {
+    public String modificar(@PathVariable("id") long id,Model model) {
     	Readers findRecordById = readerService.findRecordById(id);
     	ReaderRequest pojo = parseoInverso(findRecordById);
       model.addAttribute("request", pojo); 
@@ -46,7 +51,7 @@ public class ReaderController {
     }
     
     @GetMapping("/readers-eliminar-c/{id}")
-    public String readerEliminar1(@PathVariable("id") long id,Model model,RedirectAttributes redirectAttrs) {
+    public String eliminar(@PathVariable("id") long id,Model model,RedirectAttributes redirectAttrs) {
     	Readers findRecordById = readerService.findRecordById(id);
     	readerService.delete(findRecordById);
     	List<Readers> lista = readerService.findAll();
@@ -56,9 +61,9 @@ public class ReaderController {
     }
 
     @PostMapping("/guardar-reader")
-    public String addUser(@Valid @ModelAttribute("request") ReaderRequest request, BindingResult result, Model model) {
+    public String guardar(@Valid @ModelAttribute("request") ReaderRequest request, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-user";
+            return "add-readers";
         }
         Readers entidad = parseo(request);
         readerService.save(entidad);

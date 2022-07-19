@@ -17,8 +17,8 @@ public class Readers {
 	@Column(name = "pk_reader", nullable = false)
 	private Long pkReader;
 	
-	@Column(name = "name", length = 100, nullable = false)
-	@Size(min = 1, max = 100, message = "El campo name tiene un tama�o maximo de 100 caracteres")
+	@Column(name = "name", length = 8, nullable = false)
+	@Size(min = 1, max = 8, message = "El campo name tiene un tama�o maximo de 8 caracteres")
 	private String name;
 
 	public Long getPkReader() {
