@@ -42,4 +42,9 @@ public class ReaderServiceImpl implements IReaderService{
 		
 	}
 
+	@Override
+	public List<Readers> findByName(String nombre) {
+		return readerRepository.findByName(nombre);
+	}
+
 }

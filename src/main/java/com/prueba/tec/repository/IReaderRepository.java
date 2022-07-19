@@ -16,5 +16,9 @@ public interface IReaderRepository extends JpaRepository<Readers, Long>{
 	
 	@Query(value = "Select * from READERS ", nativeQuery = true)
 	List<Readers> findAll();
+	
+	
+	@Query(value = "Select * from READERS where name LIKE %:nombre% ", nativeQuery = true)
+	List<Readers> findByName(@Param("nombre") String nombre);
 
 }

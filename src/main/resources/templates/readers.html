@@ -31,6 +31,17 @@
 
 	<div style="width: 80%; float:right">
 	
+ <div style="width: 100%; float:center">
+    <div id="container">
+        <form action="#" th:action="@{/reader/buscar-reader}" th:object="${request}" method="post">
+            <!-- Username -->
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{nameInput}" class="form-control" id="nameInput" placeholder="Name">
+            <input type="submit" value="Buscar">
+        </form>       
+    </div>
+	</div>
+	
 		<div th:switch="${readers}">
 			<h2 th:case="null">No existen Registros!</h2>
 			<div th:case="*">

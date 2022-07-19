@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.prueba.tec.entidades.Blogs;
 import com.prueba.tec.entidades.BlogsReaders;
 import com.prueba.tec.repository.IBlogReaderRepository;
 import com.prueba.tec.service.IBlogReaderService;

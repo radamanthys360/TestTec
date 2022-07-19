@@ -32,6 +32,7 @@ public class ReaderController {
       }else {
     	  model.addAttribute("readers", lista);
       }
+      model.addAttribute("request", new ReaderRequest());
       return "readers";
     }
     
@@ -57,6 +58,7 @@ public class ReaderController {
     	List<Readers> lista = readerService.findAll();
     	
         model.addAttribute("readers", lista); 
+        model.addAttribute("request", new ReaderRequest());
         return "readers";
     }
 
@@ -71,6 +73,24 @@ public class ReaderController {
     	List<Readers> lista = readerService.findAll();
     	
         model.addAttribute("readers", lista); 
+        model.addAttribute("request", new ReaderRequest());
+        return "readers";
+    }
+    
+    
+    @PostMapping("/buscar-reader")
+    public String buscar(@Valid @ModelAttribute("request") ReaderRequest request, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-readers";
+        }
+
+        List<Readers> busqueda = readerService.findByName(request.getNameInput());
+        if(busqueda.isEmpty()) {
+        	model.addAttribute("readers", null); 
+        }else {
+        	model.addAttribute("readers", busqueda); 
+        }
+        
         return "readers";
     }
     
